@@ -1,3 +1,62 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"],
+    "tsconfigRootDir": "./"
+  },
+  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "ignorePatterns": ["node_modules/", ".next/"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-require-imports": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/restrict-template-expressions": "off",
+
+    "prettier/prettier": "warn",
+
+    "import/order": [
+      "warn",
+      {
+        "groups": ["type", ["builtin", "external", "internal"], ["parent", "sibling", "index"]],
+        "pathGroups": [
+          {
+            "pattern": "{next/**,react,react-dom/**}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**/!(types)",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "distinctGroup": false,
+        "pathGroupsExcludedImportTypes": ["next", "react", "react-dom"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 }
